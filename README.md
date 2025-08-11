@@ -309,31 +309,3 @@ python examples/run_uc_example.py
 * **Data validation**: add schema checks for inputs (demand, unit params) and automated sanity checks in CI.
 * **Human-in-the-loop**: provide explainability artifacts — startup counts, marginal units, shadow prices — for operators.
 
----
-
-# 7. Example commands & snippets
-
-Run small test:
-
-```bash
-python -m pytest tests/test_model_build.py -q
-python examples/run_uc_example.py --solver cbc --get-lmps
-```
-
-Extract commitments & LMPs (after solve, sketch):
-
-```python
-from pyomo.environ import value
-for g in model.G:
-    for t in model.T:
-        print(g, t, int(round(value(model.u[g,t]))), value(model.p[g,t]))
-# LMPs (if model.dual present)
-for t in model.T:
-    print("LMP t=", t, model.dual[model.balance[t]])
-```
-
-
-
-
-Which follow-up would you like?
-
