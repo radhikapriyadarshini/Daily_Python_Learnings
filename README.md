@@ -30,6 +30,6 @@
 | 19  | SLG Fault Analysis                       | Fault current calculation for single-line-to-ground faults      |
 | 20  | *(Upcoming)* Multi-Fault Analyzer        | Combine 3Φ, LL, LLG, and SLG fault current calculators          |
 | 21  | *(Upcoming)* Fault Vs. Impedance Plot    | Visualization of fault current trends against fault impedance   |
-| ... | *(Your next topics here)*                | Keep it concise & descriptive                                 |
+| ... |          |                               |
 
 
