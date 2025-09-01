@@ -1,15 +1,35 @@
-1. **Day 1:** Kicked off with a spark ⚡ — calculated power using Ohm’s law in Python.
-2. **Day 2:** Scaled it up 🔄 — looped through multiple loads and summed their total power.
-3. **Day 3:** Wired resistors in series 🔗 — mastered list operations for equivalent resistance.
-4. **Day 4:** Switched to parallel 🔀 — built a loop-based calculator for combined resistance.
-5. **Day 5:** Added load personality 🗂️ — used dictionaries to compute S and Power Factor.
-6. **Day 6:** Got object-oriented 🏗️ — created a `ThreePhaseLoad` class with real power brains.
-7. **Day 7:** Boosted efficiency 💡 — used NumPy arrays to crunch transmission losses fast.
-8. **Day 8:** Entered grid mode 🌐 — managed buses in Pandas DataFrame to compute fault currents and export results.
-9. **Day 9:** Per-Unit Toolkit ⚖️ — built functions to convert between actual and per-unit values.
-10. **Day 10:** Transformer + Tap Settings 🔧 — calculated secondary voltage and referred impedances.
-11. **Day 11:** DC Power Flow Solver ➡️ — computed bus angles and line flows from scratch.
-12. **Day 12:** Economic Dispatch 💸 — minimized generation costs using Lambda Iteration.
-13. **Day 13:** N-1 Contingency Analysis 🧯 — evaluated post-outage flows and overloads.
-14. **Day 14:** Net-Load & Ramp Analysis 🌤️ — modeled PV/Wind profiles and computed ramp rates.
-15. **Day 15:** Symmetrical Components Fault Calculator ⚡ — determined fault currents for LG, LL, LLG & 3Φ faults.
+# Python for Power System Engineering – 30-Day Coding Series
+
+**Author:** Radhika Priyadarshini  
+**Purpose:** A daily Python learning journal where I demystify the “black box” of Power System Engineering (PSE) by building core functionalities myself—from fundamentals to advanced topics.
+
+---
+
+##  Daily Progress Log
+
+| Day | Title                                    | Brief Description                                               |
+|-----|------------------------------------------|-----------------------------------------------------------------|
+| 01  | Simple Power Calc                        | Basic Ohm’s law function                                        |
+| 02  | Power via Lists                          | List-based multi-load power calc                                |
+| 03  | Series Resistances                       | Equivalent resistance using functions and lists                 |
+| 04  | Parallel Resistances                     | Loop-based combined resistance calculation                      |
+| 05  | Load Properties                          | Dictionaries to compute apparent power and power factor         |
+| 06  | ThreePhaseLoad Class                     | OOP implementation of three-phase load behavior                 |
+| 07  | Transmission Losses                      | NumPy arrays to quickly compute line losses                     |
+| 08  | Fault Currents with Pandas               | Bus-level fault calculations and DataFrame export               |
+| 09  | Per-Unit Toolkit                         | Utility for converting to/from per-unit system                  |
+| 10  | Transformer Tap Effects                  | Off-nominal tap and impedance referral modeling                 |
+| 11  | DC Power Flow Solver                     | Bus angle and line flow calculation via DC load flow           |
+| 12  | Economic Dispatch                        | Generator cost minimization using Lambda iteration              |
+| 13  | N-1 Contingency Analysis                 | Post-contingency line flow checks and overload detection        |
+| 14  | Net-Load and Ramp Analysis               | PV/Wind profiles, net load trends, ramp rate analysis           |
+| 15  | Symmetrical Fault Calculator             | Fault currents for LG, LL, LLG, and 3-phase faults              |
+| 16  | Load Flow Visualizer                     | Voltage profile plotting with Matplotlib                        |
+| 17  | Swing Equation Simulation                | Stability check using single-machine swing equation             |
+| 18  | Harmonic Analysis                        | Total Harmonic Distortion (THD) computation via FFT             |
+| 19  | SLG Fault Analysis                       | Fault current calculation for single-line-to-ground faults      |
+| 20  | *(Upcoming)* Multi-Fault Analyzer        | Combine 3Φ, LL, LLG, and SLG fault current calculators          |
+| 21  | *(Upcoming)* Fault Vs. Impedance Plot    | Visualization of fault current trends against fault impedance   |
+| ... | *(Your next topics here)*                | Keep it concise & descriptive                                 |
+
+
