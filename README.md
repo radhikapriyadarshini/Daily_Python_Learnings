@@ -27,7 +27,7 @@
 | 17 | Swing Equation Simulation | Stability check using single-machine swing equation | 🚀 Advanced Topics |
 | 18 | Harmonic Analysis | Total Harmonic Distortion (THD) computation via FFT | 🚀 Advanced Topics |
 | 19 | SLG Fault Analysis | Fault current calculation for single-line-to-ground faults | 📊 System Analysis |
-| 20 | (Upcoming) Multi-Fault Analyzer | Combine 3Φ, LL, LLG, and SLG fault current calculators | 🚀 Advanced Topics |
+| 20 | Multi-Fault Analyzer | Combine 3Φ, LL, LLG, and SLG fault current calculators | 🚀 Advanced Topics |
 | 21 | (Upcoming) Fault Vs. Impedance Plot | Visualization of fault current trends against fault impedance | 🚀 Advanced Topics |
 
 ## 🎯 Current Focus Areas
