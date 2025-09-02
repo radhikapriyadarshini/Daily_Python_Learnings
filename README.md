@@ -1,35 +1,803 @@
-# Python for Power System Engineering – 30-Day Coding Series
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Systems Engineering Skills Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-**Author:** Radhika Priyadarshini  
-**Purpose:** A daily Python learning journal where I demystify the “black box” of Power System Engineering (PSE) by building core functionalities myself—from fundamentals to advanced topics.
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
 
----
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-##  Daily Progress Log
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
 
-| Day | Title                                    | Brief Description                                               |
-|-----|------------------------------------------|-----------------------------------------------------------------|
-| 01  | Simple Power Calc                        | Basic Ohm’s law function                                        |
-| 02  | Power via Lists                          | List-based multi-load power calc                                |
-| 03  | Series Resistances                       | Equivalent resistance using functions and lists                 |
-| 04  | Parallel Resistances                     | Loop-based combined resistance calculation                      |
-| 05  | Load Properties                          | Dictionaries to compute apparent power and power factor         |
-| 06  | ThreePhaseLoad Class                     | OOP implementation of three-phase load behavior                 |
-| 07  | Transmission Losses                      | NumPy arrays to quickly compute line losses                     |
-| 08  | Fault Currents with Pandas               | Bus-level fault calculations and DataFrame export               |
-| 09  | Per-Unit Toolkit                         | Utility for converting to/from per-unit system                  |
-| 10  | Transformer Tap Effects                  | Off-nominal tap and impedance referral modeling                 |
-| 11  | DC Power Flow Solver                     | Bus angle and line flow calculation via DC load flow           |
-| 12  | Economic Dispatch                        | Generator cost minimization using Lambda iteration              |
-| 13  | N-1 Contingency Analysis                 | Post-contingency line flow checks and overload detection        |
-| 14  | Net-Load and Ramp Analysis               | PV/Wind profiles, net load trends, ramp rate analysis           |
-| 15  | Symmetrical Fault Calculator             | Fault currents for LG, LL, LLG, and 3-phase faults              |
-| 16  | Load Flow Visualizer                     | Voltage profile plotting with Matplotlib                        |
-| 17  | Swing Equation Simulation                | Stability check using single-machine swing equation             |
-| 18  | Harmonic Analysis                        | Total Harmonic Distortion (THD) computation via FFT             |
-| 19  | SLG Fault Analysis                       | Fault current calculation for single-line-to-ground faults      |
-| 20  | *(Upcoming)* Multi-Fault Analyzer        | Combine 3Φ, LL, LLG, and SLG fault current calculators          |
-| 21  | *(Upcoming)* Fault Vs. Impedance Plot    | Visualization of fault current trends against fault impedance   |
-| ... |          |                               |
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
 
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
 
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .stats-overview {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            min-width: 140px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .category-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .category-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .skill-item {
+            margin-bottom: 15px;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: #444;
+            font-size: 0.9rem;
+        }
+
+        .skill-level {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 1s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .fundamentals { background: linear-gradient(45deg, #4CAF50, #66BB6A); }
+        .circuits { background: linear-gradient(45deg, #2196F3, #64B5F6); }
+        .systems { background: linear-gradient(45deg, #FF9800, #FFB74D); }
+        .analysis { background: linear-gradient(45deg, #9C27B0, #BA68C8); }
+        .advanced-topics { background: linear-gradient(45deg, #F44336, #EF5350); }
+
+        /* Right Panel - Daily Coding Log */
+        .daily-log {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .log-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .log-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .log-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .daily-entry {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .daily-entry:hover {
+            background: #e3f2fd;
+            transform: translateX(5px);
+        }
+
+        .entry-day {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 0.9rem;
+        }
+
+        .entry-title {
+            font-weight: 600;
+            color: #333;
+            margin: 5px 0;
+        }
+
+        .entry-description {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .entry-skills {
+            margin-top: 8px;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            margin-right: 5px;
+            margin-top: 3px;
+        }
+
+        .add-entry-form {
+            background: #f0f4f8;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .add-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-overview {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-particles" id="particles"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>⚡ Power Systems Engineering Journey</h1>
+            <p>Learning Python as a Power System Engineer - Daily Progress Tracker</p>
+        </div>
+
+        <div class="stats-overview">
+            <div class="stat-card">
+                <div class="stat-value" id="totalDays">19</div>
+                <div class="stat-label">Days Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="overallProgress">76%</div>
+                <div class="stat-label">Overall Progress</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="projectsCompleted">19</div>
+                <div class="stat-label">Projects Done</div>
+            </div>
+        </div>
+
+        <div class="main-layout">
+            <div class="left-panel">
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <div class="category-header">
+                            <div class="category-icon fundamentals">⚡</div>
+                            <div class="category-title">Fundamentals</div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Basic Power Calculations</span>
+                                <span class="skill-level">Expert</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill fundamentals" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Data Structures (Lists)</span>
+                                <span class="skill-level">Advanced</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill fundamentals" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="category-header">
+                            <div class="category-icon circuits">🔌</div>
+                            <div class="category-title">Circuit Analysis</div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Series/Parallel Resistance</span>
+                                <span class="skill-level">Advanced</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill circuits" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Load Properties & Power Factor</span>
+                                <span class="skill-level">Advanced</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill circuits" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">OOP Implementation</span>
+                                <span class="skill-level">Intermediate</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill circuits" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="category-header">
+                            <div class="category-icon systems">⚙️</div>
+                            <div class="category-title">Power Systems</div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Three-Phase Analysis</span>
+                                <span class="skill-level">Advanced</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill systems" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Transmission Line Modeling</span>
+                                <span class="skill-level">Intermediate</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill systems" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Transformer Modeling</span>
+                                <span class="skill-level">Intermediate</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill systems" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="category-header">
+                            <div class="category-icon analysis">📊</div>
+                            <div class="category-title">System Analysis</div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Fault Current Calculations</span>
+                                <span class="skill-level">Advanced</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill analysis" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Load Flow (DC)</span>
+                                <span class="skill-level">Intermediate</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill analysis" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Economic Dispatch</span>
+                                <span class="skill-level">Intermediate</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill analysis" style="width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="daily-log">
+                <div class="log-header">
+                    <div class="log-icon">📝</div>
+                    <div class="log-title">Daily Coding Log</div>
+                </div>
+
+                <div class="add-entry-form">
+                    <div class="form-group">
+                        <label class="form-label">Project Title</label>
+                        <input type="text" class="form-input" id="projectTitle" placeholder="e.g., Multi-Fault Analyzer">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-textarea" id="projectDescription" placeholder="Brief description of what you built today..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Primary Skill Area</label>
+                        <select class="form-select" id="skillArea">
+                            <option value="fundamentals">Fundamentals</option>
+                            <option value="circuits">Circuit Analysis</option>
+                            <option value="systems">Power Systems</option>
+                            <option value="analysis">System Analysis</option>
+                            <option value="advanced">Advanced Topics</option>
+                        </select>
+                    </div>
+                    <button class="add-btn" onclick="addDailyEntry()">Add Today's Project</button>
+                </div>
+
+                <div class="log-entries" id="logEntries">
+                    <!-- Daily entries will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize with your actual completed projects
+        let dailyEntries = [
+            {day: 1, title: "Simple Power Calc", description: "Basic Ohm's law function implementation", skills: ["fundamentals"], date: "2024-08-15"},
+            {day: 2, title: "Power via Lists", description: "List-based multi-load power calculation", skills: ["fundamentals"], date: "2024-08-16"},
+            {day: 3, title: "Series Resistances", description: "Equivalent resistance using functions and lists", skills: ["circuits"], date: "2024-08-17"},
+            {day: 4, title: "Parallel Resistances", description: "Loop-based combined resistance calculation", skills: ["circuits"], date: "2024-08-18"},
+            {day: 5, title: "Load Properties", description: "Dictionaries to compute apparent power and power factor", skills: ["circuits"], date: "2024-08-19"},
+            {day: 6, title: "ThreePhaseLoad Class", description: "OOP implementation of three-phase load behavior", skills: ["systems"], date: "2024-08-20"},
+            {day: 7, title: "Transmission Losses", description: "NumPy arrays to quickly compute line losses", skills: ["systems"], date: "2024-08-21"},
+            {day: 8, title: "Fault Currents with Pandas", description: "Bus-level fault calculations and DataFrame export", skills: ["analysis"], date: "2024-08-22"},
+            {day: 9, title: "Per-Unit Toolkit", description: "Utility for converting to/from per-unit system", skills: ["systems"], date: "2024-08-23"},
+            {day: 10, title: "Transformer Tap Effects", description: "Off-nominal tap and impedance referral modeling", skills: ["systems"], date: "2024-08-24"},
+            {day: 11, title: "DC Power Flow Solver", description: "Bus angle and line flow calculation via DC load flow", skills: ["analysis"], date: "2024-08-25"},
+            {day: 12, title: "Economic Dispatch", description: "Generator cost minimization using Lambda iteration", skills: ["analysis"], date: "2024-08-26"},
+            {day: 13, title: "N-1 Contingency Analysis", description: "Post-contingency line flow checks and overload detection", skills: ["analysis"], date: "2024-08-27"},
+            {day: 14, title: "Net-Load and Ramp Analysis", description: "PV/Wind profiles, net load trends, ramp rate analysis", skills: ["analysis"], date: "2024-08-28"},
+            {day: 15, title: "Symmetrical Fault Calculator", description: "Fault currents for LG, LL, LLG, and 3-phase faults", skills: ["analysis"], date: "2024-08-29"},
+            {day: 16, title: "Load Flow Visualizer", description: "Voltage profile plotting with Matplotlib", skills: ["analysis"], date: "2024-08-30"},
+            {day: 17, title: "Swing Equation Simulation", description: "Stability check using single-machine swing equation", skills: ["advanced"], date: "2024-08-31"},
+            {day: 18, title: "Harmonic Analysis", description: "Total Harmonic Distortion (THD) computation via FFT", skills: ["advanced"], date: "2024-09-01"},
+            {day: 19, title: "SLG Fault Analysis", description: "Fault current calculation for single-line-to-ground faults", skills: ["analysis"], date: "2024-09-02"}
+        ];
+
+        // Skills tracking
+        let skillsData = {
+            totalDays: 19,
+            categories: {
+                fundamentals: {
+                    name: "Fundamentals",
+                    skills: {
+                        "Basic Power Calculations": 100,
+                        "Data Structures (Lists)": 90
+                    }
+                },
+                circuits: {
+                    name: "Circuit Analysis", 
+                    skills: {
+                        "Series/Parallel Resistance": 95,
+                        "Load Properties & Power Factor": 85,
+                        "OOP Implementation": 75
+                    }
+                },
+                systems: {
+                    name: "Power Systems",
+                    skills: {
+                        "Three-Phase Analysis": 85,
+                        "Transmission Line Modeling": 70,
+                        "Transformer Modeling": 75
+                    }
+                },
+                analysis: {
+                    name: "System Analysis",
+                    skills: {
+                        "Fault Current Calculations": 90,
+                        "Load Flow (DC)": 65,
+                        "Economic Dispatch": 70
+                    }
+                },
+                advanced: {
+                    name: "Advanced Topics",
+                    skills: {
+                        "Stability Analysis": 40,
+                        "Harmonic Analysis": 35,
+                        "Contingency Analysis": 60
+                    }
+                }
+            }
+        };
+
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        function getSkillLevel(progress) {
+            if (progress >= 90) return "Expert";
+            if (progress >= 70) return "Advanced";
+            if (progress >= 50) return "Intermediate";
+            return "Beginner";
+        }
+
+        function addDailyEntry() {
+            const title = document.getElementById('projectTitle').value;
+            const description = document.getElementById('projectDescription').value;
+            const skillArea = document.getElementById('skillArea').value;
+
+            if (!title || !description) {
+                alert('Please fill in both title and description!');
+                return;
+            }
+
+            const newDay = dailyEntries.length + 1;
+            const today = new Date().toISOString().split('T')[0];
+
+            const newEntry = {
+                day: newDay,
+                title: title,
+                description: description,
+                skills: [skillArea],
+                date: today
+            };
+
+            dailyEntries.push(newEntry);
+            skillsData.totalDays = newDay;
+
+            // Update relevant skill progress
+            const categoryKeys = Object.keys(skillsData.categories);
+            const categoryIndex = ['fundamentals', 'circuits', 'systems', 'analysis', 'advanced'].indexOf(skillArea);
+            if (categoryIndex !== -1) {
+                const category = skillsData.categories[categoryKeys[categoryIndex]];
+                Object.keys(category.skills).forEach(skillName => {
+                    if (category.skills[skillName] < 100) {
+                        category.skills[skillName] = Math.min(100, category.skills[skillName] + Math.random() * 8 + 2);
+                    }
+                });
+            }
+
+            // Clear form
+            document.getElementById('projectTitle').value = '';
+            document.getElementById('projectDescription').value = '';
+
+            updateDisplay();
+        }
+
+        function renderDailyEntries() {
+            const logContainer = document.getElementById('logEntries');
+            logContainer.innerHTML = '';
+
+            // Show most recent entries first
+            const recentEntries = dailyEntries.slice(-10).reverse();
+
+            recentEntries.forEach(entry => {
+                const entryEl = document.createElement('div');
+                entryEl.className = 'daily-entry';
+                
+                const skillTags = entry.skills.map(skill => 
+                    `<span class="skill-tag">${skill}</span>`
+                ).join('');
+
+                entryEl.innerHTML = `
+                    <div class="entry-day">Day ${entry.day}</div>
+                    <div class="entry-title">${entry.title}</div>
+                    <div class="entry-description">${entry.description}</div>
+                    <div class="entry-skills">${skillTags}</div>
+                `;
+
+                logContainer.appendChild(entryEl);
+            });
+        }
+
+        function updateDisplay() {
+            // Update stats
+            document.getElementById('totalDays').textContent = skillsData.totalDays;
+            document.getElementById('projectsCompleted').textContent = dailyEntries.length;
+
+            // Calculate overall progress
+            let totalSkills = 0;
+            let totalProgress = 0;
+
+            Object.keys(skillsData.categories).forEach(categoryKey => {
+                const category = skillsData.categories[categoryKey];
+                Object.keys(category.skills).forEach(skillName => {
+                    totalSkills++;
+                    totalProgress += category.skills[skillName];
+                });
+            });
+
+            const overallProgress = Math.round(totalProgress / totalSkills);
+            document.getElementById('overallProgress').textContent = `${overallProgress}%`;
+
+            // Update skill bars and levels
+            document.querySelectorAll('.skill-category').forEach((categoryEl, index) => {
+                const categoryKey = Object.keys(skillsData.categories)[index];
+                const category = skillsData.categories[categoryKey];
+                
+                categoryEl.querySelectorAll('.skill-item').forEach((skillEl, skillIndex) => {
+                    const skillName = Object.keys(category.skills)[skillIndex];
+                    const progress = category.skills[skillName];
+                    
+                    const progressBar = skillEl.querySelector('.progress-fill');
+                    const skillLevel = skillEl.querySelector('.skill-level');
+                    
+                    if (progressBar && skillLevel) {
+                        setTimeout(() => {
+                            progressBar.style.width = progress + '%';
+                            skillLevel.textContent = getSkillLevel(progress);
+                        }, index * 200 + skillIndex * 100);
+                    }
+                });
+            });
+
+            // Update daily entries
+            renderDailyEntries();
+        }
+
+        // Initialize
+        createParticles();
+        updateDisplay();
+
+        // Add some celebration effects when adding entries
+        function celebrateProgress() {
+            // Add a quick flash effect to stats
+            document.querySelectorAll('.stat-card').forEach(card => {
+                card.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    card.style.transform = 'scale(1)';
+                }, 200);
+            });
+        }
+
+        // Enhanced add function with celebration
+        const originalAddEntry = addDailyEntry;
+        addDailyEntry = function() {
+            originalAddEntry();
+            celebrateProgress();
+        };
+    </script>
+</body>
+</html>
