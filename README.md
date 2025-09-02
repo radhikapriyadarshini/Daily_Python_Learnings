@@ -3,10 +3,6 @@
 **Author:** Radhika Priyadarshini  
 **Purpose:** A daily Python learning journal where I demystify the "black box" of Power System Engineering (PSE) by building core functionalities myself—from fundamentals to advanced topics.
 
-## 📊 Interactive Skills Tracker
-🚀 **[View My Skills Progress](https://radhikapriyadarshini.github.io/Daily_Python_Learnings/skills-tracker.html)** - Interactive visualization of my learning journey!
-
-![Skills Tracker Preview](https://img.shields.io/badge/Skills-Interactive%20Tracker-blue?style=for-the-badge&logo=python)
 
 ## 📈 Learning Progress
 
