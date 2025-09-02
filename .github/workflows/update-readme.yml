@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Learning Repository - README Updater</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #2d3748;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .python-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .subtitle {
+            color: #4a5568;
+            font-size: 1.1em;
+            opacity: 0.8;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 1.1em;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            min-width: 140px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(0);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.8);
+            color: #4a5568;
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 1);
+            border-color: #cbd5e0;
+        }
+
+        .github-setup {
+            background: rgba(52, 152, 219, 0.1);
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .github-setup h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .github-setup ol {
+            color: #34495e;
+            padding-left: 20px;
+        }
+
+        .github-setup li {
+            margin-bottom: 8px;
+        }
+
+        .github-setup code {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .success-message {
+            background: rgba(46, 204, 113, 0.1);
+            border: 2px solid #2ecc71;
+            color: #27ae60;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+            
+            .btn-container {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="python-icon">🐍</div>
+            <h1>README Updater</h1>
+            <p class="subtitle">Update your Daily Python Learnings repository</p>
+        </div>
+
+        <div class="github-setup">
+            <h3>🚀 Setup Instructions</h3>
+            <ol>
+                <li>Save the GitHub workflow file as <code>.github/workflows/update-readme.yml</code> in your repository</li>
+                <li>Make sure your repository has Actions enabled</li>
+                <li>When you commit Python files, an issue will be created automatically</li>
+                <li>Use this form to trigger the README update workflow</li>
+            </ol>
+        </div>
+
+        <form id="updateForm">
+            <div class="form-group">
+                <label for="owner">GitHub Username</label>
+                <input type="text" id="owner" name="owner" required placeholder="your-github-username">
+            </div>
+
+            <div class="form-group">
+                <label for="repo">Repository Name</label>
+                <input type="text" id="repo" name="repo" required placeholder="Daily_Python_Learnings">
+            </div>
+
+            <div class="form-group">
+                <label for="filename">Python File Name</label>
+                <input type="text" id="filename" name="filename" required placeholder="e.g., bubble_sort.py">
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" required placeholder="Brief description of what the code does..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="type">Code Type</label>
+                <select id="type" name="type" required>
+                    <option value="">Select type...</option>
+                    <option value="Algorithm">Algorithm</option>
+                    <option value="Data Structure">Data Structure</option>
+                    <option value="Web Scraping">Web Scraping</option>
+                    <option value="API">API</option>
+                    <option value="Machine Learning">Machine Learning</option>
+                    <option value="Automation">Automation</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="btn-container">
+                <button type="button" class="btn btn-secondary" onclick="clearForm()">Clear</button>
+                <button type="submit" class="btn btn-primary">Update README</button>
+            </div>
+        </form>
+
+        <div id="successMessage" class="success-message">
+            ✅ README update workflow triggered successfully! Check your repository's Actions tab.
+        </div>
+    </div>
+
+    <script>
+        // Load saved values from localStorage
+        window.onload = function() {
+            const fields = ['owner', 'repo'];
+            fields.forEach(field => {
+                const value = localStorage.getItem(field);
+                if (value) {
+                    document.getElementById(field).value = value;
+                }
+            });
+        };
+
+        document.getElementById('updateForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            // Save username and repo for future use
+            localStorage.setItem('owner', data.owner);
+            localStorage.setItem('repo', data.repo);
+            
+            // Create the workflow dispatch URL
+            const workflowUrl = `https://github.com/${data.owner}/${data.repo}/actions/workflows/update-readme.yml`;
+            
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('successMessage').innerHTML = `
+                ✅ Form data prepared! Now you need to:<br><br>
+                1. Go to: <a href="${workflowUrl}" target="_blank" style="color: #3498db;">${workflowUrl}</a><br>
+                2. Click "Run workflow"<br>
+                3. Fill in the form with:<br>
+                   • <strong>Filename:</strong> ${data.filename}<br>
+                   • <strong>Description:</strong> ${data.description}<br>
+                   • <strong>Type:</strong> ${data.type}<br>
+                4. Click "Run workflow" to update your README
+            `;
+            
+            // Clear form fields except owner and repo
+            document.getElementById('filename').value = '';
+            document.getElementById('description').value = '';
+            document.getElementById('type').value = '';
+            
+            // Scroll to success message
+            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        function clearForm() {
+            document.getElementById('updateForm').reset();
+            document.getElementById('successMessage').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
