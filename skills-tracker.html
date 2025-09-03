@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Power Systems Engineering Skills Tracker</title>
+    <title>Power Systems Engineering Skills Progress</title>
     <style>
         * {
             margin: 0;
@@ -42,32 +42,18 @@
             opacity: 0.9;
         }
 
-        .main-layout {
-            display: grid;
-            grid-template-columns: 1fr 400px;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .left-panel {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
         .stats-overview {
-            display: flex;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
-            flex-wrap: wrap;
+            margin-bottom: 40px;
         }
 
         .stat-card {
             background: rgba(255, 255, 255, 0.95);
-            padding: 20px;
+            padding: 25px;
             border-radius: 15px;
             text-align: center;
-            min-width: 140px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -81,254 +67,166 @@
             font-size: 2rem;
             font-weight: bold;
             color: #667eea;
+            margin-bottom: 5px;
         }
 
         .stat-label {
             font-size: 0.9rem;
             color: #666;
-            margin-top: 5px;
+            font-weight: 600;
         }
 
-        .skills-grid {
+        .main-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
         }
 
-        .skill-category {
+        .skills-section {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            padding: 25px;
+            padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
         }
 
-        .skill-category:hover {
-            transform: translateY(-5px);
-        }
-
-        .category-header {
+        .section-header {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
         }
 
-        .category-icon {
-            width: 40px;
-            height: 40px;
+        .section-icon {
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 15px;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+            color: white;
         }
 
-        .category-title {
-            font-size: 1.2rem;
+        .pse-icon { background: linear-gradient(45deg, #FF6B6B, #FF8E8E); }
+        .python-icon { background: linear-gradient(45deg, #4ECDC4, #44A08D); }
+
+        .section-title {
+            font-size: 1.4rem;
             font-weight: bold;
             color: #333;
         }
 
         .skill-item {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .skill-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
 
         .skill-name {
             font-weight: 600;
             color: #444;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
-        .skill-level {
-            font-size: 0.8rem;
+        .star-rating {
+            display: flex;
+            gap: 3px;
+        }
+
+        .star {
+            font-size: 1.2rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .star.filled {
+            color: #FFD700;
+        }
+
+        .star.partial {
+            background: linear-gradient(90deg, #FFD700 50%, #ddd 50%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .skill-description {
+            font-size: 0.85rem;
             color: #666;
-            font-weight: 500;
+            margin-top: 5px;
+            line-height: 1.4;
         }
 
         .progress-bar {
             width: 100%;
-            height: 6px;
+            height: 8px;
             background: #e0e0e0;
-            border-radius: 3px;
+            border-radius: 4px;
             overflow: hidden;
-            position: relative;
+            margin-top: 8px;
         }
 
         .progress-fill {
             height: 100%;
-            border-radius: 3px;
+            border-radius: 4px;
             transition: width 1s ease-in-out;
             position: relative;
             overflow: hidden;
         }
 
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            animation: shimmer 2s infinite;
-        }
+        .pse-progress { background: linear-gradient(45deg, #FF6B6B, #FF8E8E); }
+        .python-progress { background: linear-gradient(45deg, #4ECDC4, #44A08D); }
 
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        .fundamentals { background: linear-gradient(45deg, #4CAF50, #66BB6A); }
-        .circuits { background: linear-gradient(45deg, #2196F3, #64B5F6); }
-        .systems { background: linear-gradient(45deg, #FF9800, #FFB74D); }
-        .analysis { background: linear-gradient(45deg, #9C27B0, #BA68C8); }
-        .advanced-topics { background: linear-gradient(45deg, #F44336, #EF5350); }
-
-        /* Right Panel - Daily Coding Log */
-        .daily-log {
+        .achievements-section {
+            grid-column: 1 / -1;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            padding: 25px;
+            padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-height: 600px;
-            overflow-y: auto;
         }
 
-        .log-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 15px;
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
         }
 
-        .log-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
+        .achievement-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            font-size: 1.2rem;
-        }
-
-        .log-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .daily-entry {
-            margin-bottom: 15px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            border-left: 4px solid #667eea;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .daily-entry:hover {
-            background: #e3f2fd;
-            transform: translateX(5px);
-        }
-
-        .entry-day {
-            font-weight: bold;
-            color: #667eea;
-            font-size: 0.9rem;
-        }
-
-        .entry-title {
-            font-weight: 600;
-            color: #333;
-            margin: 5px 0;
-        }
-
-        .entry-description {
-            font-size: 0.85rem;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .entry-skills {
-            margin-top: 8px;
-        }
-
-        .skill-tag {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            margin-right: 5px;
-            margin-top: 3px;
-        }
-
-        .add-entry-form {
-            background: #f0f4f8;
             padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
         }
 
-        .form-group {
-            margin-bottom: 15px;
+        .achievement-card:hover {
+            transform: scale(1.05);
         }
 
-        .form-label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-            color: #333;
+        .achievement-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
         }
 
-        .form-input, .form-textarea, .form-select {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-input:focus, .form-textarea:focus, .form-select:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .form-textarea {
-            resize: vertical;
-            min-height: 60px;
-        }
-
-        .add-btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
+        .achievement-title {
             font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
+            margin-bottom: 5px;
         }
 
-        .add-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        .achievement-desc {
+            font-size: 0.85rem;
+            opacity: 0.9;
         }
 
         .floating-particles {
@@ -367,14 +265,27 @@
             }
         }
 
-        @media (max-width: 1024px) {
-            .main-layout {
+        .mastery-indicator {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .mastery-beginner { background: #ff9999; color: white; }
+        .mastery-intermediate { background: #ffb366; color: white; }
+        .mastery-advanced { background: #66b3ff; color: white; }
+        .mastery-expert { background: #66ff99; color: white; }
+
+        @media (max-width: 768px) {
+            .main-content {
                 grid-template-columns: 1fr;
             }
             
             .stats-overview {
-                flex-direction: column;
-                align-items: center;
+                grid-template-columns: 1fr 1fr;
             }
             
             .header h1 {
@@ -388,263 +299,384 @@
     
     <div class="container">
         <div class="header">
-            <h1>⚡ Power Systems Engineering Journey</h1>
-            <p>Learning Python as a Power System Engineer - Daily Progress Tracker</p>
+            <h1>⚡ Power Systems Engineering Mastery</h1>
+            <p>Tracking Python & PSE Concept Progression - 21 Days Journey</p>
         </div>
 
         <div class="stats-overview">
             <div class="stat-card">
-                <div class="stat-value" id="totalDays">21</div>
+                <div class="stat-value">21</div>
                 <div class="stat-label">Days Completed</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" id="overallProgress">76%</div>
-                <div class="stat-label">Overall Progress</div>
+                <div class="stat-value">78%</div>
+                <div class="stat-label">Overall PSE Progress</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" id="projectsCompleted">21</div>
-                <div class="stat-label">Projects Done</div>
+                <div class="stat-value">82%</div>
+                <div class="stat-label">Python Skills</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">15</div>
+                <div class="stat-label">Concepts Mastered</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">6</div>
+                <div class="stat-label">Advanced Topics</div>
             </div>
         </div>
 
-        <div class="main-layout">
-            <div class="left-panel">
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <div class="category-header">
-                            <div class="category-icon fundamentals">⚡</div>
-                            <div class="category-title">Fundamentals</div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-header">
-                                <span class="skill-name">Basic Power Calculations</span>
-                                <span class="skill-level">Expert</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill fundamentals" style="width: 100%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-header">
-                                <span class="skill-name">Data Structures (Lists)</span>
-                                <span class="skill-level">Advanced</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill fundamentals" style="width: 90%"></div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="main-content">
+            <div class="skills-section">
+                <div class="section-header">
+                    <div class="section-icon pse-icon">⚡</div>
+                    <div class="section-title">Power Systems Engineering</div>
+                </div>
 
-                    <div class="skill-category">
-                        <div class="category-header">
-                            <div class="category-icon circuits">🔌</div>
-                            <div class="category-title">Circuit Analysis</div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-header">
-                                <span class="skill-name">Series/Parallel Resistance</span>
-                                <span class="skill-level">Advanced</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill circuits" style="width: 95%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-header">
-                                <span class="skill-name">Load Properties & Power Factor</span>
-                                <span class="skill-level">Advanced</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill circuits" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-header">
-                                <span class="skill-name">OOP Implementation</span>
-                                <span class="skill-level">Intermediate</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill circuits" style="width: 75%"></div>
-                            </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Circuit Analysis & Calculations</span>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
                         </div>
                     </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill pse-progress" style="width: 95%"></div>
+                    </div>
+                    <div class="skill-description">Ohm's law, series/parallel resistance, power calculations, load properties</div>
+                    <span class="mastery-indicator mastery-expert">Expert</span>
+                </div>
 
-                    <div class="skill-category">
-                        <div class="category-header">
-                            <div class="category-icon systems">⚙️</div>
-                            <div class="category-title">Power Systems</div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-header">
-                                <span class="skill-name">Three-Phase Analysis</span>
-                                <span class="skill-level">Advanced</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill systems" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-header">
-                                <span class="skill-name">Transmission Line Modeling</span>
-                                <span class="skill-level">Intermediate</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill systems" style="width: 70%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-header">
-                                <span class="skill-name">Transformer Modeling</span>
-                                <span class="skill-level">Intermediate</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill systems" style="width: 75%"></div>
-                            </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Three-Phase Power Systems</span>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
                         </div>
                     </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill pse-progress" style="width: 85%"></div>
+                    </div>
+                    <div class="skill-description">Balanced loads, power factor correction, phasor analysis</div>
+                    <span class="mastery-indicator mastery-advanced">Advanced</span>
+                </div>
 
-                    <div class="skill-category">
-                        <div class="category-header">
-                            <div class="category-icon analysis">📊</div>
-                            <div class="category-title">System Analysis</div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-header">
-                                <span class="skill-name">Fault Current Calculations</span>
-                                <span class="skill-level">Advanced</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill analysis" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-header">
-                                <span class="skill-name">Load Flow (DC)</span>
-                                <span class="skill-level">Intermediate</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill analysis" style="width: 65%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-header">
-                                <span class="skill-name">Economic Dispatch</span>
-                                <span class="skill-level">Intermediate</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill analysis" style="width: 70%"></div>
-                            </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Fault Analysis</span>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
                         </div>
                     </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill pse-progress" style="width: 88%"></div>
+                    </div>
+                    <div class="skill-description">3-phase, L-L, L-L-G, S-L-G fault calculations, fault impedance analysis</div>
+                    <span class="mastery-indicator mastery-advanced">Advanced</span>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Transmission Line Modeling</span>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill pse-progress" style="width: 70%"></div>
+                    </div>
+                    <div class="skill-description">Line losses, impedance calculations, transmission parameters</div>
+                    <span class="mastery-indicator mastery-intermediate">Intermediate</span>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Load Flow & Power Flow</span>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill pse-progress" style="width: 65%"></div>
+                    </div>
+                    <div class="skill-description">DC load flow, bus analysis, voltage profile studies</div>
+                    <span class="mastery-indicator mastery-intermediate">Intermediate</span>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Economic Dispatch & Optimization</span>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill pse-progress" style="width: 72%"></div>
+                    </div>
+                    <div class="skill-description">Cost minimization, Lambda iteration, generator dispatch</div>
+                    <span class="mastery-indicator mastery-intermediate">Intermediate</span>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Power System Stability</span>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill pse-progress" style="width: 45%"></div>
+                    </div>
+                    <div class="skill-description">Swing equation simulation, rotor angle stability</div>
+                    <span class="mastery-indicator mastery-beginner">Learning</span>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Harmonic Analysis</span>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill pse-progress" style="width: 42%"></div>
+                    </div>
+                    <div class="skill-description">FFT analysis, THD calculations, power quality assessment</div>
+                    <span class="mastery-indicator mastery-beginner">Learning</span>
                 </div>
             </div>
 
-            <div class="daily-log">
-                <div class="log-header">
-                    <div class="log-icon">📝</div>
-                    <div class="log-title">Daily Coding Log</div>
+            <div class="skills-section">
+                <div class="section-header">
+                    <div class="section-icon python-icon">🐍</div>
+                    <div class="section-title">Python Programming</div>
                 </div>
 
-                <div class="add-entry-form">
-                    <div class="form-group">
-                        <label class="form-label">Project Title</label>
-                        <input type="text" class="form-input" id="projectTitle" placeholder="e.g., Multi-Fault Analyzer">
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Core Python Fundamentals</span>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Description</label>
-                        <textarea class="form-textarea" id="projectDescription" placeholder="Brief description of what you built today..."></textarea>
+                    <div class="progress-bar">
+                        <div class="progress-fill python-progress" style="width: 92%"></div>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Primary Skill Area</label>
-                        <select class="form-select" id="skillArea">
-                            <option value="fundamentals">Fundamentals</option>
-                            <option value="circuits">Circuit Analysis</option>
-                            <option value="systems">Power Systems</option>
-                            <option value="analysis">System Analysis</option>
-                            <option value="advanced">Advanced Topics</option>
-                        </select>
-                    </div>
-                    <button class="add-btn" onclick="addDailyEntry()">Add Today's Project</button>
+                    <div class="skill-description">Functions, loops, conditionals, basic data types</div>
+                    <span class="mastery-indicator mastery-expert">Expert</span>
                 </div>
 
-                <div class="log-entries" id="logEntries">
-                    <!-- Daily entries will be populated here -->
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Data Structures</span>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill python-progress" style="width: 88%"></div>
+                    </div>
+                    <div class="skill-description">Lists, dictionaries, sets, tuples, list comprehensions</div>
+                    <span class="mastery-indicator mastery-advanced">Advanced</span>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Object-Oriented Programming</span>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill python-progress" style="width: 78%"></div>
+                    </div>
+                    <div class="skill-description">Classes, objects, inheritance, methods, attributes</div>
+                    <span class="mastery-indicator mastery-advanced">Advanced</span>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">NumPy & Scientific Computing</span>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill python-progress" style="width: 82%"></div>
+                    </div>
+                    <div class="skill-description">Arrays, mathematical operations, linear algebra basics</div>
+                    <span class="mastery-indicator mastery-advanced">Advanced</span>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Pandas Data Analysis</span>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill python-progress" style="width: 75%"></div>
+                    </div>
+                    <div class="skill-description">DataFrames, data manipulation, export/import, filtering</div>
+                    <span class="mastery-indicator mastery-intermediate">Intermediate</span>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Matplotlib Visualization</span>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill python-progress" style="width: 68%"></div>
+                    </div>
+                    <div class="skill-description">Plotting, charts, voltage profiles, trend analysis</div>
+                    <span class="mastery-indicator mastery-intermediate">Intermediate</span>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Complex Mathematical Operations</span>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill python-progress" style="width: 72%"></div>
+                    </div>
+                    <div class="skill-description">Complex numbers, FFT, matrix operations, optimization</div>
+                    <span class="mastery-indicator mastery-intermediate">Intermediate</span>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Algorithm Implementation</span>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill python-progress" style="width: 65%"></div>
+                    </div>
+                    <div class="skill-description">Iterative solvers, convergence algorithms, optimization methods</div>
+                    <span class="mastery-indicator mastery-intermediate">Intermediate</span>
+                </div>
+            </div>
+
+            <div class="achievements-section">
+                <div class="section-header">
+                    <div class="section-icon" style="background: linear-gradient(45deg, #FFD700, #FFA500);">🏆</div>
+                    <div class="section-title">Learning Achievements</div>
+                </div>
+
+                <div class="achievements-grid">
+                    <div class="achievement-card">
+                        <div class="achievement-icon">⚡</div>
+                        <div class="achievement-title">Circuit Master</div>
+                        <div class="achievement-desc">Mastered all fundamental circuit analysis concepts</div>
+                    </div>
+
+                    <div class="achievement-card">
+                        <div class="achievement-icon">🔥</div>
+                        <div class="achievement-title">21-Day Streak</div>
+                        <div class="achievement-desc">Consistent daily learning for 3 weeks straight</div>
+                    </div>
+
+                    <div class="achievement-card">
+                        <div class="achievement-icon">📊</div>
+                        <div class="achievement-title">Data Analyst</div>
+                        <div class="achievement-desc">Proficient in NumPy and Pandas for engineering data</div>
+                    </div>
+
+                    <div class="achievement-card">
+                        <div class="achievement-icon">⚙️</div>
+                        <div class="achievement-title">System Modeler</div>
+                        <div class="achievement-desc">Can model complex power system components</div>
+                    </div>
+
+                    <div class="achievement-card">
+                        <div class="achievement-icon">🧮</div>
+                        <div class="achievement-title">Fault Analysis Expert</div>
+                        <div class="achievement-desc">Implemented all major fault calculation methods</div>
+                    </div>
+
+                    <div class="achievement-card">
+                        <div class="achievement-icon">🚀</div>
+                        <div class="achievement-title">Advanced Learner</div>
+                        <div class="achievement-desc">Tackled stability analysis and harmonic studies</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Initialize with your actual completed projects
-        let dailyEntries = [
-            {day: 1, title: "Simple Power Calc", description: "Basic Ohm's law function implementation", skills: ["fundamentals"], date: "2024-08-15"},
-            {day: 2, title: "Power via Lists", description: "List-based multi-load power calculation", skills: ["fundamentals"], date: "2024-08-16"},
-            {day: 3, title: "Series Resistances", description: "Equivalent resistance using functions and lists", skills: ["circuits"], date: "2024-08-17"},
-            {day: 4, title: "Parallel Resistances", description: "Loop-based combined resistance calculation", skills: ["circuits"], date: "2024-08-18"},
-            {day: 5, title: "Load Properties", description: "Dictionaries to compute apparent power and power factor", skills: ["circuits"], date: "2024-08-19"},
-            {day: 6, title: "ThreePhaseLoad Class", description: "OOP implementation of three-phase load behavior", skills: ["systems"], date: "2024-08-20"},
-            {day: 7, title: "Transmission Losses", description: "NumPy arrays to quickly compute line losses", skills: ["systems"], date: "2024-08-21"},
-            {day: 8, title: "Fault Currents with Pandas", description: "Bus-level fault calculations and DataFrame export", skills: ["analysis"], date: "2024-08-22"},
-            {day: 9, title: "Per-Unit Toolkit", description: "Utility for converting to/from per-unit system", skills: ["systems"], date: "2024-08-23"},
-            {day: 10, title: "Transformer Tap Effects", description: "Off-nominal tap and impedance referral modeling", skills: ["systems"], date: "2024-08-24"},
-            {day: 11, title: "DC Power Flow Solver", description: "Bus angle and line flow calculation via DC load flow", skills: ["analysis"], date: "2024-08-25"},
-            {day: 12, title: "Economic Dispatch", description: "Generator cost minimization using Lambda iteration", skills: ["analysis"], date: "2024-08-26"},
-            {day: 13, title: "N-1 Contingency Analysis", description: "Post-contingency line flow checks and overload detection", skills: ["analysis"], date: "2024-08-27"},
-            {day: 14, title: "Net-Load and Ramp Analysis", description: "PV/Wind profiles, net load trends, ramp rate analysis", skills: ["analysis"], date: "2024-08-28"},
-            {day: 15, title: "Symmetrical Fault Calculator", description: "Fault currents for LG, LL, LLG, and 3-phase faults", skills: ["analysis"], date: "2024-08-29"},
-            {day: 16, title: "Load Flow Visualizer", description: "Voltage profile plotting with Matplotlib", skills: ["analysis"], date: "2024-08-30"},
-            {day: 17, title: "Swing Equation Simulation", description: "Stability check using single-machine swing equation", skills: ["advanced"], date: "2024-08-31"},
-            {day: 18, title: "Harmonic Analysis", description: "Total Harmonic Distortion (THD) computation via FFT", skills: ["advanced"], date: "2024-09-01"},
-            {day: 19, title: "SLG Fault Analysis", description: "Fault current calculation for single-line-to-ground faults", skills: ["analysis"], date: "2024-09-02"},
-            {day: 21, title: "Fault Current vs. Fault Impedance Plot", description: "Calculate fault current magnitude and plot trend curves", skills: ["fundamentals"], date: "2025-09-03"}
-        ];
-
-        // Skills tracking
-        let skillsData = {
-            totalDays: 21,
-            categories: {
-                fundamentals: {
-                    name: "Fundamentals",
-                    skills: {
-                        "Basic Power Calculations": 100,
-                        "Data Structures (Lists)": 90
-                    }
-                },
-                circuits: {
-                    name: "Circuit Analysis", 
-                    skills: {
-                        "Series/Parallel Resistance": 95,
-                        "Load Properties & Power Factor": 85,
-                        "OOP Implementation": 75
-                    }
-                },
-                systems: {
-                    name: "Power Systems",
-                    skills: {
-                        "Three-Phase Analysis": 85,
-                        "Transmission Line Modeling": 70,
-                        "Transformer Modeling": 75
-                    }
-                },
-                analysis: {
-                    name: "System Analysis",
-                    skills: {
-                        "Fault Current Calculations": 90,
-                        "Load Flow (DC)": 65,
-                        "Economic Dispatch": 70
-                    }
-                },
-                advanced: {
-                    name: "Advanced Topics",
-                    skills: {
-                        "Stability Analysis": 40,
-                        "Harmonic Analysis": 35,
-                        "Contingency Analysis": 60
-                    }
-                }
-            }
-        };
-
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
             for (let i = 0; i < 50; i++) {
@@ -657,148 +689,43 @@
             }
         }
 
-        function getSkillLevel(progress) {
-            if (progress >= 90) return "Expert";
-            if (progress >= 70) return "Advanced";
-            if (progress >= 50) return "Intermediate";
-            return "Beginner";
-        }
-
-        function addDailyEntry() {
-            const title = document.getElementById('projectTitle').value;
-            const description = document.getElementById('projectDescription').value;
-            const skillArea = document.getElementById('skillArea').value;
-
-            if (!title || !description) {
-                alert('Please fill in both title and description!');
-                return;
-            }
-
-            const newDay = dailyEntries.length + 1;
-            const today = new Date().toISOString().split('T')[0];
-
-            const newEntry = {
-                day: newDay,
-                title: title,
-                description: description,
-                skills: [skillArea],
-                date: today
-            };
-
-            dailyEntries.push(newEntry);
-            skillsData.totalDays = newDay;
-
-            // Update relevant skill progress
-            const categoryKeys = Object.keys(skillsData.categories);
-            const categoryIndex = ['fundamentals', 'circuits', 'systems', 'analysis', 'advanced'].indexOf(skillArea);
-            if (categoryIndex !== -1) {
-                const category = skillsData.categories[categoryKeys[categoryIndex]];
-                Object.keys(category.skills).forEach(skillName => {
-                    if (category.skills[skillName] < 100) {
-                        category.skills[skillName] = Math.min(100, category.skills[skillName] + Math.random() * 8 + 2);
-                    }
-                });
-            }
-
-            // Clear form
-            document.getElementById('projectTitle').value = '';
-            document.getElementById('projectDescription').value = '';
-
-            updateDisplay();
-        }
-
-        function renderDailyEntries() {
-            const logContainer = document.getElementById('logEntries');
-            logContainer.innerHTML = '';
-
-            // Show most recent entries first
-            const recentEntries = dailyEntries.slice(-10).reverse();
-
-            recentEntries.forEach(entry => {
-                const entryEl = document.createElement('div');
-                entryEl.className = 'daily-entry';
-                
-                const skillTags = entry.skills.map(skill => 
-                    `<span class="skill-tag">${skill}</span>`
-                ).join('');
-
-                entryEl.innerHTML = `
-                    <div class="entry-day">Day ${entry.day}</div>
-                    <div class="entry-title">${entry.title}</div>
-                    <div class="entry-description">${entry.description}</div>
-                    <div class="entry-skills">${skillTags}</div>
-                `;
-
-                logContainer.appendChild(entryEl);
+        // Animate progress bars on load
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach((bar, index) => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, index * 100);
             });
-        }
-
-        function updateDisplay() {
-            // Update stats
-            document.getElementById('totalDays').textContent = skillsData.totalDays;
-            document.getElementById('projectsCompleted').textContent = dailyEntries.length;
-
-            // Calculate overall progress
-            let totalSkills = 0;
-            let totalProgress = 0;
-
-            Object.keys(skillsData.categories).forEach(categoryKey => {
-                const category = skillsData.categories[categoryKey];
-                Object.keys(category.skills).forEach(skillName => {
-                    totalSkills++;
-                    totalProgress += category.skills[skillName];
-                });
-            });
-
-            const overallProgress = Math.round(totalProgress / totalSkills);
-            document.getElementById('overallProgress').textContent = `${overallProgress}%`;
-
-            // Update skill bars and levels
-            document.querySelectorAll('.skill-category').forEach((categoryEl, index) => {
-                const categoryKey = Object.keys(skillsData.categories)[index];
-                const category = skillsData.categories[categoryKey];
-                
-                categoryEl.querySelectorAll('.skill-item').forEach((skillEl, skillIndex) => {
-                    const skillName = Object.keys(category.skills)[skillIndex];
-                    const progress = category.skills[skillName];
-                    
-                    const progressBar = skillEl.querySelector('.progress-fill');
-                    const skillLevel = skillEl.querySelector('.skill-level');
-                    
-                    if (progressBar && skillLevel) {
-                        setTimeout(() => {
-                            progressBar.style.width = progress + '%';
-                            skillLevel.textContent = getSkillLevel(progress);
-                        }, index * 200 + skillIndex * 100);
-                    }
-                });
-            });
-
-            // Update daily entries
-            renderDailyEntries();
         }
 
         // Initialize
         createParticles();
-        updateDisplay();
+        animateProgressBars();
 
-        // Add some celebration effects when adding entries
-        function celebrateProgress() {
-            // Add a quick flash effect to stats
-            document.querySelectorAll('.stat-card').forEach(card => {
-                card.style.transform = 'scale(1.05)';
-                setTimeout(() => {
-                    card.style.transform = 'scale(1)';
-                }, 200);
+        // Add hover effects to star ratings
+        document.querySelectorAll('.star-rating').forEach(rating => {
+            const stars = rating.querySelectorAll('.star');
+            stars.forEach((star, index) => {
+                star.addEventListener('mouseenter', () => {
+                    stars.forEach((s, i) => {
+                        if (i <= index) {
+                            s.style.color = '#FFD700';
+                        }
+                    });
+                });
+                
+                star.addEventListener('mouseleave', () => {
+                    stars.forEach(s => {
+                        if (!s.classList.contains('filled')) {
+                            s.style.color = '#ddd';
+                        }
+                    });
+                });
             });
-        }
-
-        // Enhanced add function with celebration
-        const originalAddEntry = addDailyEntry;
-        addDailyEntry = function() {
-            originalAddEntry();
-            celebrateProgress();
-        };
+        });
     </script>
 </body>
 </html>
