@@ -3,6 +3,12 @@
 **Author:** Radhika Priyadarshini  
 **Purpose:** A daily Python learning journal where I demystify the "black box" of Power System Engineering (PSE) by building core functionalities myself—from fundamentals to advanced topics.
 
+## 🌟 Interactive Skills Tracker
+**👉 [View Live Skills Tracker](https://radhikapriyadarshini.github.io/Daily_Python_Learnings/skills-tracker.html)** ⚡
+
+Track my real-time progress with an interactive dashboard showing skill levels, daily entries, and achievement stats!
+
+---
 
 ## 📈 Learning Progress
 
@@ -27,7 +33,7 @@
 | 17 | Swing Equation Simulation | Stability check using single-machine swing equation | 🚀 Advanced Topics |
 | 18 | Harmonic Analysis | Total Harmonic Distortion (THD) computation via FFT | 🚀 Advanced Topics |
 | 19 | SLG Fault Analysis | Fault current calculation for single-line-to-ground faults | 📊 System Analysis |
-| 20 | Multi-Fault Analyzer | Combine 3Φ, LL, LLG, and SLG fault current calculators | 🚀 Advanced Topics |
+| 20 | Multi-Fault Analyzer | Combine 3∅, LL, LLG, and SLG fault current calculators | 🚀 Advanced Topics |
 | 21 | (Upcoming) Fault Vs. Impedance Plot | Visualization of fault current trends against fault impedance | 🚀 Advanced Topics |
 
 ## 🎯 Current Focus Areas
@@ -70,13 +76,29 @@
 ## 🎖️ Achievements
 
 - 🏆 **19 consecutive days** of coding
-- 🎯 **15+ power system concepts** implemented from scratch
+- 🎯 **19+ power system concepts** implemented from scratch
 - 📚 **5 skill categories** with measurable progress
 - 🔥 **Growing from beginner to intermediate** in most areas
 
 ## 📝 Daily Learning Notes
 
 Each day focuses on a specific power systems concept, implemented in Python to build both programming skills and domain expertise. The goal is to understand the underlying mathematics and engineering principles rather than just using black-box tools.
+
+## 🤖 Auto-Update System
+
+This repository now features an automated update system! Use the `auto_updater.py` script to:
+- Automatically update both README.md and skills-tracker.html
+- Track progress and skill levels
+- Maintain consistent formatting
+
+**Usage:**
+```bash
+# Interactive mode
+python auto_updater.py
+
+# Command line mode  
+python auto_updater.py auto "Project Title" "Description" category
+```
 
 ---
 
