@@ -35,5 +35,6 @@ Track my real-time progress with an interactive dashboard showing skill levels, 
 | 19 | SLG Fault Analysis | Fault current calculation for single-line-to-ground faults | 📊 System Analysis |
 | 20 | Multi-Fault Analyzer | Combine 3∅, LL, LLG, and SLG fault current calculators | 🚀 Advanced Topics |
 | 21 | Fault Current vs. Fault Impedance Plot | Calculate fault current magnitude and plot trend curves | ⚡ Fundamentals |
+| 22 | Z-Bus Fault Analysis | Used Zbus method to compute bus fault currents & voltages | ⚡ Fundamentals |
 
 ## 
