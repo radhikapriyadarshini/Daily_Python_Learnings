@@ -2,12 +2,6 @@
 
 **Author:** Radhika Priyadarshini  
 **Purpose:** A daily Python learning journal where I demystify the "black box" of Power System Engineering (PSE) by building core functionalities myself—from fundamentals to advanced topics.
-
-## 🌟 Interactive Skills Tracker
-**👉 [View Live Skills Tracker](https://radhikapriyadarshini.github.io/Daily_Python_Learnings/skills-tracker.html)** ⚡
-
-Track my real-time progress with an interactive dashboard showing skill levels, daily entries, and achievement stats!
-
 ---
 
 ## 📈 Learning Progress
@@ -36,5 +30,8 @@ Track my real-time progress with an interactive dashboard showing skill levels, 
 | 20 | Multi-Fault Analyzer | Combine 3∅, LL, LLG, and SLG fault current calculators | 🚀 Advanced Topics |
 | 21 | Fault Current vs. Fault Impedance Plot | Calculate fault current magnitude and plot trend curves | ⚡ Fundamentals |
 | 22 | Z-Bus Fault Analysis | Used Zbus method to compute bus fault currents & voltages | ⚡ Fundamentals |
+| 23 | Wind Turbine Power Curve | Implemented a modular WindTurbine class modeling the power–wind-speed relationship with piecewise and Betz-Cp approaches, plus time-series simulation and capacity-factor calculation | ⚡ Fundamentals |
+| 24 | Wind Turbine Energy Simulation | Extended Day 23 with synthetic hourly wind profiles, farm-level energy aggregation (with wake-loss consideration), and plotting power/CF results | ⚡ Fundamentals |
+| 25 | Pitch Control & Dynamic Response | Added a rotor inertia model and a PI-based pitch controller; simulated wind gusts showing how pitch adjusts to maintain rated power, with dynamic rotor speed response | ⚡ Fundamentals |
 
 ## 
