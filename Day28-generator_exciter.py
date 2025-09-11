@@ -1,9 +1,5 @@
 """
 Day 28: Governor (primary frequency) + AVR (exciter) added to SMIB + pitch turbine
-
-Save: day28_governor_exciter.py
-Requires: numpy, scipy, matplotlib
-
 Brief:
 - Uses PitchTurbineSimple from Day 27 (embedded here as a reduced turbine model).
 - SMIB has: swing equation, governor, exciter.
