@@ -33,5 +33,10 @@
 | 23 | Wind Turbine Power Curve | Implemented a modular WindTurbine class modeling the power–wind-speed relationship with piecewise and Betz-Cp approaches, plus time-series simulation and capacity-factor calculation | ⚡ Fundamentals |
 | 24 | Wind Turbine Energy Simulation | Extended Day 23 with synthetic hourly wind profiles, farm-level energy aggregation (with wake-loss consideration), and plotting power/CF results | ⚡ Fundamentals |
 | 25 | Pitch Control & Dynamic Response | Added a rotor inertia model and a PI-based pitch controller; simulated wind gusts showing how pitch adjusts to maintain rated power, with dynamic rotor speed response | ⚡ Fundamentals |
+| 26 | Wind Farm Aggregation with Wake Losses | Built a WindFarm class arranging multiple turbines; applied the Jensen wake model to simulate wake-induced power losses and overall farm output curves | ⚙️ Power Systems |
+| 27 | Grid Integration (SMIB + Pitch Turbine) | Coupled the pitch-controlled turbine with a single-machine infinite bus (SMIB) model using the swing equation to study rotor angle and frequency response under wind variations | ⚙️ Power Systems |
+| 28 | Governor (Primary Frequency Response) + AVR | Extended the SMIB+turbine model with classical governor droop control and AVR excitation system; simulated combined frequency and voltage dynamics | 🚀 Advanced Topics |
+| 29 | Converter-Based Turbine with Inertial Emulation | Developed a simplified converter-based wind turbine (full-converter / DFIG style) including synthetic inertia, droop control, and fast active/reactive support for grid frequency stabilization | 🚀 Advanced Topics |
+
 
 ## 
