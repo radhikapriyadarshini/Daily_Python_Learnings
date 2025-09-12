@@ -37,7 +37,7 @@
 | 27 | Grid Integration (SMIB + Pitch Turbine) | Coupled the pitch-controlled turbine with a single-machine infinite bus (SMIB) model using the swing equation to study rotor angle and frequency response under wind variations | ⚙️ Power Systems |
 | 28 | Governor (Primary Frequency Response) + AVR | Extended the SMIB+turbine model with classical governor droop control and AVR excitation system; simulated combined frequency and voltage dynamics | 🚀 Advanced Topics |
 | 29 | Converter-Based Turbine with Inertial Emulation | Developed a simplified converter-based wind turbine (full-converter / DFIG style) including synthetic inertia, droop control, and fast active/reactive support for grid frequency stabilization | 🚀 Advanced Topics |
-| 30 | Export time-series  - Creates time-series profiles, Exports to CSV | ⚡ Fundamentals |
+| 30 | Export time-series | Creates time-series profiles, Exports to CSV | ⚡ Fundamentals |
 
 
 ## 
