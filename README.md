@@ -38,6 +38,7 @@
 | 28 | Governor (Primary Frequency Response) + AVR | Extended the SMIB+turbine model with classical governor droop control and AVR excitation system; simulated combined frequency and voltage dynamics | 🚀 Advanced Topics |
 | 29 | Converter-Based Turbine with Inertial Emulation | Developed a simplified converter-based wind turbine (full-converter / DFIG style) including synthetic inertia, droop control, and fast active/reactive support for grid frequency stabilization | 🚀 Advanced Topics |
 | 30 | Export time-series | Creates time-series profiles, Exports to CSV | ⚡ Fundamentals |
+| 31 | Replay Time-Series for Grid Response Validation | ead the exported CSV (Day 30) and simulate how a simple single-machine infinite bus (SMIB) system responds when wind & load time-series are applied | ⚡ Fundamentals |
 
 
 ## 
